@@ -26,7 +26,7 @@ RUN /bin/bash -l -c "rvm use 2.4.1 --default"
 RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
 
 # install overcommit via gem
-COPY files/Gemfile .
+COPY Gemfile .
 RUN /bin/bash -l -c "bundle install"
 
 # install csslint, jshint, pydocstyble and pycodestyle
@@ -34,6 +34,8 @@ RUN /bin/bash -c "npm install -g csslint"
 RUN /bin/bash -c "npm install -g jshint"
 RUN /bin/bash -c "pip install pydocstyle"
 RUN /bin/bash -c "pip install pycodestyle"
+
+RUN \echo "source /etc/profile.d/rvm.sh" >> /etc/bash.bashrc
 
 ENV DEBIAN_FRONTEND teletype
 
